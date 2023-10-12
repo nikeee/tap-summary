@@ -16,18 +16,7 @@ async function main() {
 		try {
 			const tapContent = await fs.readFile(tapFile, "utf-8");
 			const parsed = Parser.parse(tapContent);
-
-			const flattened: EventLog = [];
-			// We only want to flat on the first layer of child events
-			for (const event of parsed) {
-				if (event[0] === "child") {
-					flattened.push(...event[1]);
-				} else {
-					flattened.push(event);
-				}
-			}
-
-			appendReport(flattened, showSuccessful);
+			appendReport(parsed, showSuccessful);
 		} catch (err: any) {
 			core.summary.addDetails(
 				`Failed to process file "${tapFile}"`,
