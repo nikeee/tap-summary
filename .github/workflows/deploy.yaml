@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+        contents: write
+
+    steps:
+      - uses: actions/checkout@v4 # source branch
+      - name: Check out distribution branch
+        uses: actions/checkout@v4 # dist branch
+        with:
+            ref: "dist"
+            path: "dist"
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build # writes dist/index.js
+      - run: |
+          cp action.yml dist/
+          cp README.md dist/
+          cp LICENSE dist/
+
+      - working-directory: dist
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add --verbose .
+          git commit -m "Update from CI" --allow-empty
+          git push origin dist
