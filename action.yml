@@ -7,6 +7,11 @@ inputs:
     default: "**/*.tap"
     description: Path to the TAP file(s).
 
+  show-successful:
+    required: false
+    default: "false"
+    description: Whether to include successful tests oin the test summary table.
+
 runs:
   using: "node20"
   main: "index.js"
