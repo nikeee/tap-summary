@@ -6,6 +6,7 @@ import { SummaryTableCell, SummaryTableRow } from "@actions/core/lib/summary";
 
 async function main() {
 	const path = core.getInput("path", { required: false }) ?? "**/*.tap";
+	const showSuccessful = core.getInput("show-successful", { required: false }) === "true";
 
 	const tapFiles = await glob(path);
 	core.debug(`Found ${tapFiles.length} files:`);
@@ -15,7 +16,18 @@ async function main() {
 		try {
 			const tapContent = await fs.readFile(tapFile, "utf-8");
 			const parsed = Parser.parse(tapContent);
-			appendReport(parsed);
+
+			const flattened: EventLog = [];
+			// We only want to flat on the first layer of child events
+			for (const event of parsed) {
+				if (event[0] === "child") {
+					flattened.push(...event[1]);
+				} else {
+					flattened.push(event);
+				}
+			}
+
+			appendReport(flattened, showSuccessful);
 		} catch (err: any) {
 			core.summary.addDetails(
 				`Failed to process file "${tapFile}"`,
@@ -67,7 +79,7 @@ const icons = {
 };
 const footer = `This test report was produced by the <a href="https://github.com/nikeee/tap-summary">tap-summary action</a>.&nbsp; Made with ❤️ in Hesse.`;
 
-function appendReport(events: EventLog) {
+function appendReport(events: EventLog, showSuccessful: boolean) {
 	const completed = events
 		.filter((event) => event[0] === "complete")
 		.map((event) => event[1]);
@@ -89,13 +101,17 @@ function appendReport(events: EventLog) {
 		.map((event) => event[1] as { ok: boolean, name?: string, id?: number })
 		.sort((a, b) => Number(a.ok) - Number(b.ok));
 
+	const resultsToDisplay = showSuccessful
+		? testResults
+		: testResults.filter((result) => !result.ok);
+
 	const rows: SummaryTableRow[] = [
 		[
 			{ data: "Status", header: true },
 			{ data: "Test", header: true },
 		]
 	];
-	for (const test of testResults) {
+	for (const test of resultsToDisplay) {
 		const testName = test.name ?? test.id?.toString() ?? "Unknown Test";
 		rows.push([
 			{ data: test.ok ? "✅" : "❌" },
