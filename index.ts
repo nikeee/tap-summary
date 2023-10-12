@@ -6,7 +6,8 @@ import { SummaryTableCell, SummaryTableRow } from "@actions/core/lib/summary";
 
 async function main() {
 	const path = core.getInput("path", { required: false }) ?? "**/*.tap";
-	const showSuccessful = core.getInput("show-successful", { required: false }) === "true";
+	const showSuccessful =
+		core.getInput("show-successful", { required: false }) === "true";
 
 	const tapFiles = await glob(path);
 	core.debug(`Found ${tapFiles.length} files:`);
@@ -87,27 +88,26 @@ function appendReport(events: EventLog, showSuccessful: boolean) {
 
 	const testResults = events
 		.filter((event) => event[0] === "assert")
-		.map((event) => event[1] as { ok: boolean, name?: string, id?: number })
+		.map((event) => event[1] as { ok: boolean; name?: string; id?: number })
 		.sort((a, b) => Number(a.ok) - Number(b.ok));
 
 	const resultsToDisplay = showSuccessful
 		? testResults
 		: testResults.filter((result) => !result.ok);
 
-	const rows: SummaryTableRow[] = [
-		[
-			{ data: "Status", header: true },
-			{ data: "Test", header: true },
-		]
-	];
-	for (const test of resultsToDisplay) {
-		const testName = test.name ?? test.id?.toString() ?? "Unknown Test";
-		rows.push([
-			{ data: test.ok ? "✅" : "❌" },
-			{ data: testName },
-		]);
+	if (resultsToDisplay.length > 0) {
+		const rows: SummaryTableRow[] = [
+			[
+				{ data: "Status", header: true },
+				{ data: "Test", header: true },
+			],
+		];
+		for (const test of resultsToDisplay) {
+			const testName = test.name ?? test.id?.toString() ?? "Unknown Test";
+			rows.push([{ data: test.ok ? "✅" : "❌" }, { data: testName }]);
+		}
+		core.summary.addTable(rows);
 	}
-	core.summary.addTable(rows);
 
 	console.log(events);
 	console.log(completionData); // TODO: Remove
