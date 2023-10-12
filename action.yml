@@ -1,0 +1,16 @@
+name: "TAP Job Summary"
+description: "Creates a summary for Test Anything Protocol (TAP) reports."
+author: "Niklas Mollenhauer"
+inputs:
+  path:
+    required: false
+    default: "**/*.tap"
+    description: Path to the TAP file(s).
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
+
+branding:
+  icon: check-square
+  color: green
