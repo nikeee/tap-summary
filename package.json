@@ -1,32 +1,32 @@
 {
-  "name": "tap-summary",
-  "version": "1.0.0",
-  "author": "Niklas Mollenhauer",
-  "license": "MIT",
-  "description": "GitHub Action to summarize TAP output for job/workflow summaries.",
-  "private": true,
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc --noEmit && esbuild --bundle --minify --platform=node index.ts --outfile=dist/index.js",
-    "ci": "biome ci ./",
-    "format": "biome format --write ./",
-    "lint": "biome lint ./",
-    "lint:apply": "biome lint --apply ./",
-    "test": "tsc --noEmit"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+git@github.com:nikeee/tap-summary.git"
-  },
-  "dependencies": {
-    "@actions/core": "^1.10.1",
-    "glob": "^10.4.2",
-    "tap-parser": "^17.0.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
-    "@types/node": "^20.14.9",
-    "esbuild": "^0.22.0",
-    "typescript": "^5.5.2"
-  }
+	"name": "tap-summary",
+	"version": "1.0.0",
+	"author": "Niklas Mollenhauer",
+	"license": "MIT",
+	"description": "GitHub Action to summarize TAP output for job/workflow summaries.",
+	"private": true,
+	"main": "index.js",
+	"scripts": {
+		"build": "tsc --noEmit && esbuild --bundle --minify --platform=node index.ts --outfile=dist/index.js",
+		"ci": "biome ci ./",
+		"format": "biome format --write ./",
+		"lint": "biome lint ./",
+		"lint:fix": "biome lint --write ./ && biome check --write ./",
+		"test": "tsc --noEmit"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+git@github.com:nikeee/tap-summary.git"
+	},
+	"dependencies": {
+		"@actions/core": "^1.10.1",
+		"glob": "^10.4.2",
+		"tap-parser": "^17.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.8.3",
+		"@types/node": "^20.14.9",
+		"esbuild": "^0.22.0",
+		"typescript": "^5.5.2"
+	}
 }

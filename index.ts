@@ -1,8 +1,11 @@
 import * as fs from "node:fs/promises";
 import * as core from "@actions/core";
+import {
+	SummaryTableCell,
+	type SummaryTableRow,
+} from "@actions/core/lib/summary";
 import { glob } from "glob";
-import { EventLog, Parser } from "tap-parser";
-import { SummaryTableCell, SummaryTableRow } from "@actions/core/lib/summary";
+import { type EventLog, Parser } from "tap-parser";
 
 async function main() {
 	const path = core.getInput("path", { required: false }) ?? "**/*.tap";
@@ -18,6 +21,7 @@ async function main() {
 			const tapContent = await fs.readFile(tapFile, "utf-8");
 			const parsed = Parser.parse(tapContent);
 			appendReport(parsed, showSuccessful);
+			// biome-ignore lint/suspicious/noExplicitAny: handled properly
 		} catch (err: any) {
 			core.summary.addDetails(
 				`Failed to process file "${tapFile}"`,
