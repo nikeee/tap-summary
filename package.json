@@ -7,7 +7,7 @@
 	"private": true,
 	"main": "index.js",
 	"scripts": {
-		"build": "tsc --noEmit && esbuild --bundle --minify --platform=node index.ts --outfile=dist/index.js",
+		"build": "tsc --noEmit && esbuild --bundle --minify --platform=node --packages=bundle index.ts --outfile=dist/index.js",
 		"ci": "biome ci ./",
 		"format": "biome format --write ./",
 		"lint": "biome lint ./",
