@@ -26,7 +26,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@types/node": "^22.13.8",
-		"esbuild": "^0.24.2",
+		"esbuild": "^0.25.0",
 		"typescript": "^5.8.2"
 	}
 }
