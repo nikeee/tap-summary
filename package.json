@@ -20,13 +20,13 @@
 	},
 	"dependencies": {
 		"@actions/core": "^1.11.1",
-		"glob": "^11.0.1",
+		"glob": "^11.0.2",
 		"tap-parser": "^18.0.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@types/node": "^22.15.3",
-		"esbuild": "^0.25.2",
-		"typescript": "^5.8.2"
+		"esbuild": "^0.25.3",
+		"typescript": "^5.8.3"
 	}
 }
