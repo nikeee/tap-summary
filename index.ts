@@ -1,9 +1,6 @@
 import * as fs from "node:fs/promises";
 import * as core from "@actions/core";
-import {
-	SummaryTableCell,
-	type SummaryTableRow,
-} from "@actions/core/lib/summary";
+import type { SummaryTableRow } from "@actions/core/lib/summary";
 import { glob } from "glob";
 import { type EventLog, Parser } from "tap-parser";
 
@@ -71,6 +68,8 @@ const icons = {
 	skip: "https://svg.test-summary.com/icon/skip.svg?s=12",
 	none: "https://svg.test-summary.com/icon/none.svg?s=12",
 };
+
+// biome-ignore lint/correctness/noUnusedVariables: TODO
 const footer = `This test report was produced by the <a href="https://github.com/nikeee/tap-summary">tap-summary action</a>.&nbsp; Made with ❤️ in Hesse.`;
 
 function appendReport(events: EventLog, showSuccessful: boolean) {
@@ -141,6 +140,7 @@ function getSummaryImage(event: CompletionEventData): [string, string] {
 	return [url.toString(), altText];
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: TODO
 function getTestImage(event: CompletionEventData): [string, string] {
 	if (event.fail > 0) {
 		return [icons.fail, `${event.fail} test failures`];
