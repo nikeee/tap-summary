@@ -13,9 +13,9 @@ jobs:
         contents: write
 
     steps:
-      - uses: actions/checkout@v4 # source branch
+      - uses: actions/checkout@v5 # source branch
       - name: Check out distribution branch
-        uses: actions/checkout@v4 # dist branch
+        uses: actions/checkout@v5 # dist branch
         with:
             ref: "dist"
             path: "dist"
