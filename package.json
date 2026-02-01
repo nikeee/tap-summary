@@ -19,7 +19,7 @@
 		"url": "git+git@github.com:nikeee/tap-summary.git"
 	},
 	"dependencies": {
-		"@actions/core": "^2.0.1",
+		"@actions/core": "^3.0.0",
 		"glob": "^13.0.0",
 		"tap-parser": "^18.3.0"
 	},
