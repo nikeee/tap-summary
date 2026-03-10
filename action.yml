@@ -13,7 +13,7 @@ inputs:
     description: Whether to include successful tests oin the test summary table.
 
 runs:
-  using: "node20"
+  using: "node24"
   main: "index.js"
 
 branding:
