@@ -11,14 +11,14 @@ Automatically pick up all `.tap` files in the project directory:
 - run: <whatever you need to do to run tests>
 
 - name: Test Summary
-  uses: nikeee/tap-summary@v1
+  uses: nikeee/tap-summary@v2
   if: always()
 ```
 
 If you only want to include some TAP files:
 ```yaml
 - name: Test Summary
-  uses: nikeee/tap-summary@v1
+  uses: nikeee/tap-summary@v2
   with:
     path: "**/*.test.tap" # default: "**/*.tap"
   if: always()
