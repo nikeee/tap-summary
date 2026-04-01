@@ -3,7 +3,7 @@
 		"target": "es2024",
 
 		"module": "ESNext",
-		"moduleResolution": "node",
+		"moduleResolution": "nodenext",
 
 		"declaration": true,
 		"outDir": "dist",
