@@ -19,14 +19,14 @@
 		"url": "git+git@github.com:nikeee/tap-summary.git"
 	},
 	"dependencies": {
-		"@actions/core": "^3.0.0",
+		"@actions/core": "^3.0.1",
 		"glob": "^13.0.6",
-		"tap-parser": "^18.3.0"
+		"tap-parser": "^18.3.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.10",
+		"@biomejs/biome": "^2.4.14",
 		"@types/node": "^25.6.0",
 		"esbuild": "^0.27.4",
-		"typescript": "^6.0.2"
+		"typescript": "^6.0.3"
 	}
 }
