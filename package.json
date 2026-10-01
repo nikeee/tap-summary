@@ -24,7 +24,7 @@
 		"tap-parser": "^18.3.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.5.11",
+		"@biomejs/biome": "^2.5.14",
 		"@types/node": "^26.6.3",
 		"esbuild": "^0.28.2",
 		"typescript": "^7.0.2"
